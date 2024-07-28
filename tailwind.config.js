@@ -4,7 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        WebBlue: "#0047ab",
+        WebBlue: "#0046C0",
+      },
+      fontFamily: {
+        nunito: ["Nunito", "sans-serif"],
       },
     },
   },
