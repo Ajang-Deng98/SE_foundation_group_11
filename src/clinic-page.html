@@ -1,152 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="output.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="font-nunito">
-    <header class="p-5 text-xl text-white bg-WebBlue">
-      <div class="flex items-center justify-between">
-        <div>
-          <img
-            src="../images/Pïïr Amit - Copy.png"
-            alt="Pïïr Amit Logo"
-            class="h-[50px]"
-          />
-        </div>
-        <button id="menu">
-          <i class="text-3xl ri-menu-line md:hidden"></i>
-        </button>
-        <nav class="hidden md:inline-block">
-          <ul class="flex gap-4">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
-        </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Clinics</title>
+  <link rel="stylesheet" href="output.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 400px; width: 100%; }
+  </style>
+</head>
+<body class="font-nunito">
+  <header class="p-5 text-xl text-white bg-WebBlue">
+    <div class="flex items-center justify-between">
+      <div>
+        <img src="../images/Pïïr Amit - Copy.png" alt="Pïïr Amit Logo" class="h-[50px]" />
       </div>
-      <div id="nav-links" class="hidden">
-        <ul class="flex flex-col items-end pt-6 gap-4 h-[50vh]">
+      <button id="menu">
+        <i class="text-3xl ri-menu-line md:hidden"></i>
+      </button>
+      <nav class="hidden md:inline-block">
+        <ul class="flex gap-4">
           <li><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">FAQ</a></li>
           <li><a href="#">Contact Us</a></li>
         </ul>
-      </div>
-    </header>
-    <main class="p-10">
-      <section>
-        <div class="flex flex-col justify-center md:flex-row md:gap-28">
-          <div class="my-10 md:w-2/5">
-            <p class="text-5xl font-medium">Find the nearest clinic below</p>
-            <p class="my-10">
-              Looking for medical care? Use our search tool to find clinics near
-              you. Enter your location to see available options and get the care
-              you need, when you need it.
-            </p>
-            <button
-              class="py-4 my-10 font-medium text-white rounded-md shadow-2xl bg-WebBlue shadow-WebBlue px-14"
-            >
-              <i class="ri-map-pin-line"></i>
-              Navigate
-            </button>
-          </div>
-          <div class="">
-            <img src="../images/doctors.jpg" alt="doctors" class="mt-12" />
-          </div>
-        </div>
-      </section>
-      <section
-        class="flex flex-col items-center justify-center py-20 md:pt-10 md:pb-20"
-      >
-        <h2 class="mb-4 text-3xl font-bold">Find a Clinic Near You</h2>
-        <form class="flex flex-col justify-center gap-4 md:flex-row">
-          <input
-            type="text"
-            placeholder="Enter your state"
-            class="px-4 py-1 border border-gray-300 rounded-md"
-          />
-          <input
-            type="text"
-            placeholder="Enter your city"
-            class="px-4 py-1 border border-gray-300 rounded-md"
-          />
+      </nav>
+    </div>
+    <div id="nav-links" class="hidden">
+      <ul class="flex flex-col items-end pt-6 gap-4 h-[50vh]">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+  <main class="p-10">
+    <section>
+      <div class="flex flex-col justify-center md:flex-row md:gap-28">
+        <div class="my-10 md:w-2/5">
+          <p class="text-5xl font-medium">Find the nearest clinic below</p>
+          <p class="my-10">
+            Looking for medical care? Use our search tool to find clinics near
+            you. Enter your location to see available options and get the care
+            you need, when you need it.
+          </p>
           <button
-            type="submit"
-            class="px-6 py-1 font-medium text-white rounded-md shadow-2xl bg-WebBlue shadow-WebBlue"
+            class="py-4 my-10 font-medium text-white rounded-md shadow-2xl bg-WebBlue shadow-WebBlue px-14"
           >
-            Search
+            <i class="ri-map-pin-line"></i>
+            Navigate
           </button>
-        </form>
-      </section>
-    </main>
-    <footer class="py-10 text-white bg-WebBlue">
-      <div
-        class="flex flex-col md:flex-row justify-around p-5 flex-wrap max-w-[1000px] mx-auto"
-      >
-        <div class="flex-1">
-          <h4 class="pb-[5px] mb-4 border-b-[1px] border-white font-medium">
-            Locations
-          </h4>
-          <ul class="flex flex-col gap-2">
-            <li>South Sudan</li>
-            <li>Juba City</li>
-            <li>Shirikat</li>
-          </ul>
         </div>
-        <div class="flex-1">
-          <h4 class="pb-[5px] mb-4 border-b-[1px] border-white font-medium">
-            Quick Links
-          </h4>
-          <ul class="flex flex-col gap-2">
-            <li>Home</li>
-            <li>Services</li>
-            <li>About Us</li>
-            <li>Contact</li>
-          </ul>
-        </div>
-        <div class="flex-1">
-          <h4 class="pb-[5px] mb-4 border-b-[1px] border-white font-medium">
-            Contact Info
-          </h4>
-          <ul class="flex flex-col gap-2">
-            <li>+211926851806</li>
-            <li>piiramit@gmail.com</li>
-            <li>piiramithealthcaremail.Com</li>
-          </ul>
-        </div>
-        <div class="flex-1">
-          <h4 class="pb-[5px] mb-4 border-b-[1px] border-white font-medium">
-            Follow Us
-          </h4>
-          <ul class="flex flex-col gap-2">
-            <li>Facebook</li>
-            <li>Twitter</li>
-            <li>Instagram</li>
-            <li>LinkedIn</li>
-          </ul>
+        <div class="">
+          <img src="../images/doctors.jpg" alt="doctors" class="mt-12" />
         </div>
       </div>
-      <div class="">
-        <hr class="my-2 border-t border-white" />
-        <p class="pt-5 text-center">
-          &copy; Piir Amit Health Hub Co. 2024. All Rights Reserved
-        </p>
+    </section>
+    <section
+      class="flex flex-col items-center justify-center py-20 md:pt-10 md:pb-20"
+    >
+      <h2 class="mb-4 text-3xl font-bold">Find a Clinic Near You</h2>
+      <form id="searchForm" class="flex flex-col justify-center gap-4 md:flex-row">
+        <input
+          type="text"
+          id="stateInput"
+          placeholder="Enter your state"
+          class="px-4 py-1 border border-gray-300 rounded-md"
+          required
+        />
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Enter your city"
+          class="px-4 py-1 border border-gray-300 rounded-md"
+          required
+        />
+        <button
+          type="submit"
+          class="px-6 py-1 font-medium text-white rounded-md shadow-2xl bg-WebBlue shadow-WebBlue"
+        >
+          Search
+        </button>
+      </form>
+    </section>
+    <section id="mapSection" class="hidden">
+      <h2 class="mb-4 text-3xl font-bold">Clinics in Your Area</h2>
+      <div id="map"></div>
+    </section>
+  </main>
+  <footer class="py-10 text-white bg-WebBlue">
+    <div
+      class="flex flex-col md:flex-row justify-around p-5 flex-wrap max-w-[1000px] mx-auto"
+    >
+      <div class="flex-1">
+        <h4 class="pb-[5px] mb-4 border-b-[1px] border-white font-medium">
+          Locations
+        </h4>
+        <ul class="flex flex-col gap-2">
+          <li>South Sudan</li>
+          <li>Juba City</li>
+          <li>Shirikat</li>
+        </ul>
       </div>
-    </footer>
-    <script src="clinic-page.js"></script>
-  </body>
+      <div class="flex-1">
+        <h4 class="pb-[5px] mb-4 border-b-[1px] border-white font-medium">
+          Quick Links
+        </h4>
+        <ul class="flex flex-col gap-2">
+          <li>Home</li>
+          <li>Services</li>
+          <li>About Us</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div class="flex-1">
+        <h4 class="pb-[5px] mb-4 border-b-[1px] border-white font-medium">
+          Contact Info
+        </h4>
+        <ul class="flex flex-col gap-2">
+          <li>+211926851806</li>
+          <li>piiramit@gmail.com</li>
+          <li>piiramithealthcaremail.Com</li>
+        </ul>
+      </div>
+      <div class="flex-1">
+        <h4 class="pb-[5px] mb-4 border-b-[1px] border-white font-medium">
+          Follow Us
+        </h4>
+        <ul class="flex flex-col gap-2">
+          <li>Facebook</li>
+          <li>Twitter</li>
+          <li>Instagram</li>
+          <li>LinkedIn</li>
+        </ul>
+      </div>
+    </div>
+    <div class="">
+      <hr class="my-2 border-t border-white" />
+      <p class="pt-5 text-center">
+        &copy; Piir Amit Health Hub Co. 2024. All Rights Reserved
+      </p>
+    </div>
+  </footer>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="clinic-page.js"></script>
+</body>
 </html>
