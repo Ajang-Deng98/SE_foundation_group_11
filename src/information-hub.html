@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Healthcare Information Hub</title>
     <link rel="stylesheet" href="output.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,6 +15,29 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
+    <style>
+      /* Style for the dropdown */
+      select {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f9f9f9; /* Light background color */
+        color: #333; /* Dark text color */
+        font-size: 16px; /* Increased font size */
+        cursor: pointer; /* Pointer cursor */
+        transition: border-color 0.3s; /* Smooth border color transition */
+      }
+
+      select:hover {
+        border-color: #007bff; /* Change border color on hover */
+      }
+
+      select:focus {
+        outline: none; /* Remove default outline */
+        border-color: #0056b3; /* Darker border on focus */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow on focus */
+      }
+    </style>
   </head>
   <body class="font-nunito">
     <header class="p-5 text-xl text-white bg-WebBlue">
@@ -22,11 +45,11 @@
         <div>
           <img
             src="../images/Pïïr Amit - Copy.png"
-            alt="Pïïr Amit Logo"
+            alt="Piir Amit Logo"
             class="h-[50px]"
           />
         </div>
-        <button id="menu">
+        <button id="menu" aria-label="Toggle menu">
           <i class="text-3xl md:hidden ri-menu-line"></i>
         </button>
         <nav class="hidden md:inline-block">
@@ -37,24 +60,13 @@
             <li><a href="#">Contact Us</a></li>
           </ul>
         </nav>
-        <!-- Language Dropdown -->
         <div>
-          <select id="languageDropdown" class="p-2 rounded bg-white text-black">
-            <option value="">Select Language</option>
+          <label for="languageDropdown" class="sr-only">Select Language</label>
+          <select id="languageDropdown" class="p-2 rounded">
+            <option value="en">English</option>
             <option value="ar">Arabic</option>
-            <option value="din">Dinka</option>
-            <option value="nua">Nuer</option>
-            <option value="azd">Azande</option>
           </select>
         </div>
-      </div>
-      <div id="nav-links" class="hidden">
-        <ul class="flex flex-col items-end h-[50vh] pt-6">
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
       </div>
     </header>
 
@@ -64,21 +76,22 @@
           <div
             class="relative z-10 flex flex-col justify-center w-1/2 gap-5 pl-10 my-10 text-white bg-WebBlue left-10"
           >
-            <p class="w-3/4 text-3xl font-medium">
+            <h1 class="w-3/4 text-3xl font-medium">
               Disease Control: Protecting Yourself and Your Community
-            </p>
+            </h1>
           </div>
           <div class="relative w-1/2 right-10">
-            <img src="../images/istockphoto-627492508-612x612-1.jpg" alt="" />
+            <img src="../images/istockphoto-627492508-612x612-1.jpg" alt="Healthcare illustration" />
           </div>
         </div>
       </section>
       <section class="py-7">
         <h2 class="mb-10 text-4xl font-bold">Common Diseases</h2>
         <div class="flex flex-wrap gap-4 overflow-auto">
-          <div class="flex-1 min-w-96">
+          <!-- Malaria Card -->
+          <article class="flex-1 min-w-96">
             <div class="p-16 text-2xl bg-blue-400">
-              <p class="font-medium">Malaria</p>
+              <h3 class="font-medium">Malaria</h3>
             </div>
             <div class="p-5 bg-gray-100">
               <p>
@@ -91,10 +104,11 @@
                 Continue reading
               </button>
             </div>
-          </div>
-          <div class="flex-1 min-w-96">
+          </article>
+          <!-- Tuberculosis Card -->
+          <article class="flex-1 min-w-96">
             <div class="bg-[#9fba36] text-2xl p-16">
-              <p class="font-medium">Tuberculosis</p>
+              <h3 class="font-medium">Tuberculosis</h3>
             </div>
             <div class="p-5 bg-gray-100">
               <p>
@@ -107,10 +121,11 @@
                 Continue reading
               </button>
             </div>
-          </div>
-          <div class="flex-1 min-w-96">
+          </article>
+          <!-- Cholera Card -->
+          <article class="flex-1 min-w-96">
             <div class="p-16 text-2xl bg-yellow-400">
-              <p class="font-medium">Cholera</p>
+              <h3 class="font-medium">Cholera</h3>
             </div>
             <div class="p-5 bg-gray-100">
               <p>
@@ -123,10 +138,11 @@
                 Continue reading
               </button>
             </div>
-          </div>
-          <div class="flex-1 min-w-96">
+          </article>
+          <!-- HIV/AIDS Card -->
+          <article class="flex-1 min-w-96">
             <div class="bg-[#4e85e9] text-2xl p-16">
-              <p class="font-medium">HIV/AIDS</p>
+              <h3 class="font-medium">HIV/AIDS</h3>
             </div>
             <div class="p-5 bg-gray-100">
               <p>
@@ -139,7 +155,7 @@
                 Continue reading
               </button>
             </div>
-          </div>
+          </article>
         </div>
         <button class="p-5 my-10 font-medium text-white bg-WebBlue">
           Disease OVERVIEW
@@ -147,11 +163,8 @@
       </section>
     </main>
 
-    <!-- Footer -->
     <footer class="py-10 text-white bg-WebBlue">
-      <div
-        class="flex flex-col md:flex-row justify-around p-5 flex-wrap max-w-[1000px] mx-auto"
-      >
+      <div class="flex flex-col md:flex-row justify-around p-5 flex-wrap max-w-[1000px] mx-auto">
         <div class="flex-1">
           <h4 class="pb-[5px] mb-4 border-b-[1px] border-white font-medium">
             Locations
@@ -180,7 +193,7 @@
           <ul class="flex flex-col gap-2">
             <li>+211926851806</li>
             <li>piiramit@gmail.com</li>
-            <li>piiramithealthcaremail.Com</li>
+            <li>piiramithealthcaremail.com</li>
           </ul>
         </div>
         <div class="flex-1">
@@ -195,44 +208,74 @@
           </ul>
         </div>
       </div>
-      <div class="">
+      <div>
         <hr class="my-2 border-t border-white" />
         <p class="pt-5 text-center">
           &copy; Piir Amit Health Hub Co. 2024. All Rights Reserved
         </p>
       </div>
     </footer>
-    
-    <!-- Include Google Translate Script -->
-    <script>
-      document.getElementById('languageDropdown').addEventListener('change', function() {
-        const languageCode = this.value;
-        if (languageCode) {
-          translatePage(languageCode);
-        }
-      });
 
-      function translatePage(languageCode) {
-        const existingScript = document.getElementById('google-translate-script');
-        if (existingScript) {
-          existingScript.remove();
-        }
+<!-- Google Translation API Script -->
+<script>
+  const apiKey = 'AIzaSyC9yoGRDDWGz90FW5ZwSCz8U9O_RZ7PZsc';
 
-        const script = document.createElement('script');
-        script.id = 'google-translate-script';
-        script.src = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
-        document.head.appendChild(script);
+  // Store the original texts
+  let originalTexts = [];
 
-        window.googleTranslateElementInit = function() {
-          new google.translate.TranslateElement({
-            pageLanguage: 'en', // Default page language
-            includedLanguages: 'ar,din,nua,azd', // Include languages you support
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-          }, 'google_translate_element');
-        };
+  document.addEventListener('DOMContentLoaded', () => {
+    const textElements = document.querySelectorAll('h1, h2, p, li, span, button, h3, h4, h5, h6, a');
+    textElements.forEach((el, index) => {
+      originalTexts.push({ text: el.innerText, element: el }); // Store both text and element reference
+    });
+  });
+
+  document.getElementById('languageDropdown').addEventListener('change', function() {
+    const languageCode = this.value;
+    if (languageCode) {
+      if (languageCode === 'en') {
+        resetToDefault();
+      } else {
+        translatePage(languageCode);
       }
-    </script>
-    <div id="google_translate_element"></div>
-    <script src="clinic-page.js"></script>
+    }
+  });
+
+  function resetToDefault() {
+    // Restore the original text
+    originalTexts.forEach(item => {
+      item.element.innerText = item.text;
+    });
+  }
+
+  function translatePage(languageCode) {
+    // Select only elements that should be translated, excluding links
+    const textElements = originalTexts
+      .filter(item => item.element.tagName.toLowerCase() !== 'a')
+      .map(item => item.element);
+
+    const textsToTranslate = textElements.map(el => el.innerText);
+
+    fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        q: textsToTranslate,
+        target: languageCode,
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      const translations = data.data.translations;
+      translations.forEach((translation, index) => {
+        textElements[index].innerText = translation.translatedText;
+      });
+    })
+    .catch(error => console.error('Error translating:', error));
+  }
+</script>
+
   </body>
 </html>

@@ -11,9 +11,39 @@
   />
   <title>Login Form</title>
   <link rel="stylesheet" href="../css/login.css" />
+  <style>
+    /* Style for the dropdown */
+    select {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f9f9f9; /* Light background color */
+      color: #333; /* Dark text color */
+      font-size: 16px; /* Increased font size */
+      cursor: pointer; /* Pointer cursor */
+      transition: border-color 0.3s; /* Smooth border color transition */
+    }
+
+    select:hover {
+      border-color: #007bff; /* Change border color on hover */
+    }
+
+    select:focus {
+      outline: none; /* Remove default outline */
+      border-color: #0056b3; /* Darker border on focus */
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow on focus */
+    }
+  </style>
 </head>
 <body>
   <div class="login-container">
+    <div>
+      <label for="languageDropdown" class="sr-only">Select Language</label>
+      <select id="languageDropdown" class="p-2 rounded">
+        <option value="en">English</option>
+        <option value="ar">Arabic</option>
+      </select>
+    </div>
     <div class="login-form">
       <h1>Welcome</h1>
       <h2>Welcome to Piir Amit Healthcare App</h2>
@@ -76,5 +106,65 @@
       }
     });
   </script>
+  <!-- Google Translation API Script -->
+<script>
+  const apiKey = 'AIzaSyC9yoGRDDWGz90FW5ZwSCz8U9O_RZ7PZsc';
+
+  // Store the original texts
+  let originalTexts = [];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const textElements = document.querySelectorAll('h1, h2, p, li, span, button, h3, h4, h5, h6, a');
+    textElements.forEach((el, index) => {
+      originalTexts.push({ text: el.innerText, element: el }); // Store both text and element reference
+    });
+  });
+
+  document.getElementById('languageDropdown').addEventListener('change', function() {
+    const languageCode = this.value;
+    if (languageCode) {
+      if (languageCode === 'en') {
+        resetToDefault();
+      } else {
+        translatePage(languageCode);
+      }
+    }
+  });
+
+  function resetToDefault() {
+    // Restore the original text
+    originalTexts.forEach(item => {
+      item.element.innerText = item.text;
+    });
+  }
+
+  function translatePage(languageCode) {
+    // Select only elements that should be translated, excluding links
+    const textElements = originalTexts
+      .filter(item => item.element.tagName.toLowerCase() !== 'a')
+      .map(item => item.element);
+
+    const textsToTranslate = textElements.map(el => el.innerText);
+
+    fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        q: textsToTranslate,
+        target: languageCode,
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      const translations = data.data.translations;
+      translations.forEach((translation, index) => {
+        textElements[index].innerText = translation.translatedText;
+      });
+    })
+    .catch(error => console.error('Error translating:', error));
+  }
+</script>
 </body>
 </html>
