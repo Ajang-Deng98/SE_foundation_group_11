@@ -37,6 +37,16 @@
             <li><a href="#">Contact Us</a></li>
           </ul>
         </nav>
+        <!-- Language Dropdown -->
+        <div>
+          <select id="languageDropdown" class="p-2 rounded bg-white text-black">
+            <option value="">Select Language</option>
+            <option value="ar">Arabic</option>
+            <option value="din">Dinka</option>
+            <option value="nua">Nuer</option>
+            <option value="azd">Azande</option>
+          </select>
+        </div>
       </div>
       <div id="nav-links" class="hidden">
         <ul class="flex flex-col items-end h-[50vh] pt-6">
@@ -192,6 +202,37 @@
         </p>
       </div>
     </footer>
+    
+    <!-- Include Google Translate Script -->
+    <script>
+      document.getElementById('languageDropdown').addEventListener('change', function() {
+        const languageCode = this.value;
+        if (languageCode) {
+          translatePage(languageCode);
+        }
+      });
+
+      function translatePage(languageCode) {
+        const existingScript = document.getElementById('google-translate-script');
+        if (existingScript) {
+          existingScript.remove();
+        }
+
+        const script = document.createElement('script');
+        script.id = 'google-translate-script';
+        script.src = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
+        document.head.appendChild(script);
+
+        window.googleTranslateElementInit = function() {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en', // Default page language
+            includedLanguages: 'ar,din,nua,azd', // Include languages you support
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          }, 'google_translate_element');
+        };
+      }
+    </script>
+    <div id="google_translate_element"></div>
     <script src="clinic-page.js"></script>
   </body>
 </html>

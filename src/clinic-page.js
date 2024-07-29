@@ -1,8 +1,6 @@
 document.querySelector("#menu").addEventListener("click", function () {
-  document.querySelector("#nav-links").style.display =
-    document.querySelector("#nav-links").style.display == "none"
-      ? "block"
-      : "none";
+  const navLinks = document.querySelector("#nav-links");
+  navLinks.style.display = navLinks.style.display === "none" ? "block" : "none";
 });
 
 document.getElementById('searchForm').addEventListener('submit', async (e) => {
@@ -26,11 +24,17 @@ document.getElementById('searchForm').addEventListener('submit', async (e) => {
   }
 });
 
+let map; // Declare map variable in the outer scope to track its state
+
 function displayClinicsOnMap(clinics) {
   const mapSection = document.getElementById('mapSection');
   mapSection.classList.remove('hidden');
 
-  const map = L.map('map').setView([4.85, 31.6], 6); // Default view centered on South Sudan
+  if (map) {
+    map.remove(); // Remove the existing map instance before creating a new one
+  }
+
+  map = L.map('map').setView([4.85, 31.6], 6); // Default view centered on South Sudan
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
