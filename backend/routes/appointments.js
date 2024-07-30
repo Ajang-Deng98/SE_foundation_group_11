@@ -15,9 +15,9 @@ router.get('/', async (req, res) => {
 
 // Create a new appointment
 router.post('/', authenticateToken, async (req, res) => {
-  const { clinic_id, date, time, reason, ticketNumber } = req.body;
+  const { clinic, date, time, reason, ticketNumber } = req.body;
   try {
-    const appointment = await Appointment.create(req.user.id, clinic_id, date, time, reason, ticketNumber, req.user.email);
+    const appointment = await Appointment.create(req.user.id, clinic, date, time, reason, ticketNumber, req.user.email);
     res.status(201).json(appointment);
   } catch (err) {
     res.status(500).json({ error: err.message });

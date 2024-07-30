@@ -10,7 +10,7 @@ CREATE TABLE users (
 CREATE TABLE appointments (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    clinic_id INTEGER REFERENCES clinics(id),
+    clinic  VARCHAR(100) NOT NULL,
     date DATE NOT NULL,
     time TIME NOT NULL,
     status VARCHAR(50) DEFAULT 'pending',

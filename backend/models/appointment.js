@@ -10,16 +10,16 @@ const transporter = nodemailer.createTransport({
 });
 
 const Appointment = {
-  create: async (user_id, clinic_id, date, time, reason, ticketNumber, email, status = 'pending') => {
-    const query = 'INSERT INTO appointments (user_id, clinic_id, date, time, reason, ticket_number, status) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
-    const values = [user_id, clinic_id, date, time, reason, ticketNumber, status];
+  create: async (user_id, clinic, date, time, reason, ticketNumber, email, status = 'pending') => {
+    const query = 'INSERT INTO appointments (user_id, clinic, date, time, reason, ticket_number, status) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+    const values = [user_id, clinic, date, time, reason, ticketNumber, status];
 
     try {
       const result = await pool.query(query, values);
       const appointment = result.rows[0];
 
       // Send email confirmation after creating the appointment
-      await this.sendEmailConfirmation(appointment, email);
+      //await this.sendEmailConfirmation(appointment, email);
 
       return appointment;
     } catch (error) {
@@ -73,7 +73,7 @@ const Appointment = {
     }
   },
 
-  sendEmailConfirmation: async (appointment, email) => {
+  /*sendEmailConfirmation: async (appointment, email) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
@@ -87,7 +87,7 @@ const Appointment = {
     } catch (error) {
       console.error('Email sending error:', error);
     }
-  }
+  }*/
 };
 
 module.exports = Appointment;

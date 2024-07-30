@@ -5,7 +5,6 @@ const cors = require('cors'); // Importing the cors middleware
 const usersRoute = require('./routes/users');
 const articlesRoute = require('./routes/articles');
 const clinicsRoute = require('./routes/clinics');
-const faqsRoute = require('./routes/faqs');
 const appointmentsRoute = require('./routes/appointments');
 
 dotenv.config();
@@ -23,7 +22,6 @@ app.get('/', (req, res) => {
 app.use('/users', usersRoute);
 app.use('/articles', articlesRoute);
 app.use('/clinics', clinicsRoute);
-app.use('/faqs', faqsRoute);
 app.use('/appointments', appointmentsRoute);
 
 const PORT = process.env.PORT || 5000;
