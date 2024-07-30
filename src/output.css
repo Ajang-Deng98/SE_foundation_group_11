@@ -1004,6 +1004,10 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:relative {
+    position: relative;
+  }
+
   .md\:inline-block {
     display: inline-block;
   }
@@ -1016,12 +1020,28 @@ video {
     width: 40%;
   }
 
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+
+  .md\:w-3\/4 {
+    width: 75%;
+  }
+
   .md\:flex-row {
     flex-direction: row;
   }
 
+  .md\:flex-nowrap {
+    flex-wrap: nowrap;
+  }
+
   .md\:gap-28 {
     gap: 7rem;
+  }
+
+  .md\:p-0 {
+    padding: 0px;
   }
 
   .md\:pb-20 {
