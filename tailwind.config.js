@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         WebBlue: "#0046C0",
+        WhiteSmoke: "#f5f5f5",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
