@@ -10,11 +10,22 @@ const transporter = nodemailer.createTransport({
 });
 
 const Appointment = {
-  create: async (user_id, clinic_id, date, time, status = 'pending') => {
-    const query = 'INSERT INTO appointments (user_id, clinic_id, date, time, status) VALUES ($1, $2, $3, $4, $5) RETURNING *';
-    const values = [user_id, clinic_id, date, time, status];
-    const result = await pool.query(query, values);
-    return result.rows[0];
+  create: async (user_id, clinic_id, date, time, reason, ticketNumber, email, status = 'pending') => {
+    const query = 'INSERT INTO appointments (user_id, clinic_id, date, time, reason, ticket_number, status) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+    const values = [user_id, clinic_id, date, time, reason, ticketNumber, status];
+
+    try {
+      const result = await pool.query(query, values);
+      const appointment = result.rows[0];
+
+      // Send email confirmation after creating the appointment
+      await this.sendEmailConfirmation(appointment, email);
+
+      return appointment;
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+      throw new Error('Could not create appointment');
+    }
   },
 
   getAll: async () => {
@@ -26,22 +37,40 @@ const Appointment = {
   getById: async (id) => {
     const query = 'SELECT * FROM appointments WHERE id = $1';
     const values = [id];
-    const result = await pool.query(query, values);
-    return result.rows[0];
+
+    try {
+      const result = await pool.query(query, values);
+      return result.rows[0];
+    } catch (error) {
+      console.error('Error fetching appointment by ID:', error);
+      throw new Error('Could not fetch appointment');
+    }
   },
 
   updateStatus: async (id, status) => {
     const query = 'UPDATE appointments SET status = $1 WHERE id = $2 RETURNING *';
     const values = [status, id];
-    const result = await pool.query(query, values);
-    return result.rows[0];
+
+    try {
+      const result = await pool.query(query, values);
+      return result.rows[0];
+    } catch (error) {
+      console.error('Error updating appointment status:', error);
+      throw new Error('Could not update appointment status');
+    }
   },
 
   delete: async (id) => {
     const query = 'DELETE FROM appointments WHERE id = $1 RETURNING *';
     const values = [id];
-    const result = await pool.query(query, values);
-    return result.rows[0];
+
+    try {
+      const result = await pool.query(query, values);
+      return result.rows[0];
+    } catch (error) {
+      console.error('Error deleting appointment:', error);
+      throw new Error('Could not delete appointment');
+    }
   },
 
   sendEmailConfirmation: async (appointment, email) => {
@@ -49,16 +78,15 @@ const Appointment = {
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Appointment Confirmation',
-      text: `Your appointment is scheduled for ${appointment.date} at ${appointment.time}.`
+      text: `Your appointment is scheduled for ${appointment.date} at ${appointment.time}. Reason: ${appointment.reason}. Ticket Number: ${appointment.ticket_number}.`
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log('Email sending error:', error);
-      } else {
-        console.log('Email sent:', info.response);
-      }
-    });
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log('Email sent:', appointment);
+    } catch (error) {
+      console.error('Email sending error:', error);
+    }
   }
 };
 
