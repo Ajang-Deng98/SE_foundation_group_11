@@ -5,6 +5,8 @@
     "main": "app.js",
     "scripts": {
         "start": "node app.js",
+        "build": "cd ../src && npm install && npm run build",
+        "heroku-postbuild": "npm install",
         "test": "jest"
     },
     "dependencies": {
@@ -23,5 +25,10 @@
     },
     "devDependencies": {
         "jest": "^29.7.0"
+    },
+    "engines": {
+        "node": "v20.13.1",  
+        "npm": "10.8.2"     
     }
+    
 }

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const path = require('path'); // Import the path module
+const path = require('path');
 
 const usersRoute = require('./routes/users');
 const articlesRoute = require('./routes/articles');
@@ -14,16 +14,16 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors()); // Enabling CORS for all origins
+app.use(cors());
 app.use(bodyParser.json());
-
 
 // Serve static files from the '../src' directory
 const staticPath = path.join(__dirname, '../src');
 app.use(express.static(staticPath));
 
+// Serve index.html for the root route
 app.get('/', (req, res) => {
-  res.send('Welcome to the Healthcare Information Hub API');
+  res.sendFile(path.join(staticPath, 'index.html'));
 });
 
 app.use('/users', usersRoute);
