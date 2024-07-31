@@ -1,4 +1,9 @@
 {
+  "name": "healthcare",
+    "version": "1.0.0",
+    "description": "whole application",
+    "main": "backend/app.js",
+    
   "dependencies": {
     "@google-cloud/translate": "^8.3.0",
     "@sendgrid/mail": "^8.1.3",
