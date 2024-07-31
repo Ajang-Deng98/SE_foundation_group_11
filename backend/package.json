@@ -6,8 +6,7 @@
     "scripts": {
         "start": "node app.js",
         "build": "cd ../src && npm install && npm run build",
-        "heroku-postbuild": "npm run build",
-        "heroku-postbuild-install": "npm install",
+        "heroku-postbuild": "npm install && npm run build",
         "test": "jest"
     },
     "dependencies": {
